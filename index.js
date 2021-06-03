@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const environment = process.env.NODE_ENV || 'development';
 const configuration = require('./knexfile')[environment];
 const database = require('knex')(configuration);
@@ -8,6 +9,7 @@ const bodyParser = require('body-parser');
 
 app.set('port', process.env.PORT || 3000);
 app.locals.title = 'Space Truckers API';
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded( {extended : true }));
 
